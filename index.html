@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ATech electronics — We transform your needs into cutting-edge solutions</title>
+  <title>ATech // Signal Field — electronics design &amp; manufacturing</title>
   <meta name="description" content="ATech electronics: cutting-edge electronics design, electronics manufacturing services and a reliable partner since 1990. Materija, Slovenia." />
   <link rel="icon" href="https://www.atech.si/wp-content/themes/twentyfifteen/atech/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,200..900&family=Michroma&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script type="importmap">
     { "imports": {
@@ -17,375 +17,295 @@
     } }
   </script>
 </head>
-<body class="is-loading">
+<body class="is-booting">
+  <canvas class="field" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
 
-  <!-- ============ PRELOADER ============ -->
-  <div class="loader" aria-hidden="true">
-    <div class="loader__grid"></div>
-    <div class="loader__inner">
-      <div class="loader__mono">ATECH/BOOT — SIGNAL INTEGRITY CHECK</div>
-      <div class="loader__count"><span data-count>000</span><sup>%</sup></div>
-      <div class="loader__bar"><i></i></div>
-      <div class="loader__meta">
-        <span>46.0°N 14.0°E</span><span>Materija, SI</span><span>Est. 1990</span>
-      </div>
-    </div>
+  <!-- boot -->
+  <div class="boot" aria-hidden="true">
+    <pre class="boot__log" data-boot></pre>
+    <div class="boot__bar"><i data-boot-bar></i></div>
+    <span class="boot__pct" data-boot-pct>000</span>
   </div>
 
-  <!-- ============ CURSOR ============ -->
-  <div class="cursor" aria-hidden="true"><div class="cursor__ring"><span class="cursor__label"></span></div><div class="cursor__dot"></div></div>
+  <!-- cursor -->
+  <div class="xhair" aria-hidden="true">
+    <i class="xhair__h"></i><i class="xhair__v"></i>
+    <span class="xhair__box"></span>
+    <span class="xhair__label" data-xlabel></span>
+  </div>
 
-  <div class="grain" aria-hidden="true"></div>
-
-  <!-- ============ HEADER ============ -->
-  <header class="header">
-    <a href="#top" class="brand" aria-label="ATech electronics — home">
-      <span class="brand__word"><b>A</b>tech</span>
-      <span class="brand__sub">electronics</span>
-    </a>
-    <nav class="header__nav" aria-label="Primary">
-      <a href="#solutions" data-hover>Solutions</a>
-      <a href="#stories" data-hover>References</a>
-      <a href="#news" data-hover>News</a>
-      <a href="#about" data-hover>About</a>
-      <a href="https://atech.si/zaposlitvene-priloznosti/en_us/" data-hover>Careers</a>
+  <!-- fixed HUD -->
+  <header class="hud hud--top">
+    <a href="#top" class="logo" data-scramble aria-label="ATech electronics — home">ATECH<span>//</span>ELECTRONICS</a>
+    <nav class="menu" aria-label="Primary">
+      <a href="#solutions" data-scramble>solutions <i>↗</i></a>
+      <a href="#process" data-scramble>process <i>↗</i></a>
+      <a href="#stories" data-scramble>references <i>↗</i></a>
+      <a href="#about" data-scramble>about <i>↗</i></a>
+      <a href="#contact" data-scramble>contact <i>↗</i></a>
     </nav>
-    <div class="header__right">
-      <div class="lang"><a href="https://www.atech.si?lang=sl_si">SI</a><span>/</span><a href="#top" class="is-active">EN</a></div>
-      <a href="#contact" class="pill" data-magnetic><span>Contact</span></a>
-      <button class="burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
-    </div>
   </header>
-
-  <!-- ============ MENU OVERLAY ============ -->
-  <div class="menu" aria-hidden="true">
-    <div class="menu__bg"></div>
-    <nav class="menu__links">
-      <a href="#solutions"><small>01</small><span>Solutions</span></a>
-      <a href="#stories"><small>02</small><span>References</span></a>
-      <a href="#news"><small>03</small><span>News</span></a>
-      <a href="#about"><small>04</small><span>About</span></a>
-      <a href="https://atech.si/zaposlitvene-priloznosti/en_us/"><small>05</small><span>Careers</span></a>
-      <a href="#contact"><small>06</small><span>Contact</span></a>
-    </nav>
-    <div class="menu__foot">
-      <a href="mailto:info@atech.si">info@atech.si</a>
-      <a href="tel:+38682008800">+386 8 200 88 00</a>
-      <span>Bač pri Materiji 30, SI-6242 Materija</span>
-    </div>
+  <div class="hud hud--bottom">
+    <span class="hud__xy" data-xy aria-hidden="true">X 0000 · Y 0000</span>
+    <button type="button" class="snd" data-snd aria-pressed="false" aria-label="Toggle sound"><span data-snd-label>sound off</span></button>
   </div>
 
-  <main id="smooth">
-
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="top">
-      <canvas class="hero__gl" aria-hidden="true"></canvas>
-      <div class="hero__vignette"></div>
-      <div class="hero__hud" aria-hidden="true">
-        <span class="hud hud--tl">PCB/REV.36 — ACTIVE</span>
-        <span class="hud hud--tr">PROBE <b data-probe>——— , ———</b></span>
-        <span class="hud hud--bl">Peace of Mind Guarantee</span>
-        <span class="hud hud--br">Scroll to power on ↓</span>
-      </div>
-      <div class="hero__content">
-        <p class="eyebrow"><i class="dot"></i> Electronics design &amp; manufacturing — since 1990</p>
-        <h1 class="hero__title" data-split-lines>
-          <span class="line"><span>We transform</span></span>
-          <span class="line"><span>your <em>needs</em> into</span></span>
-          <span class="line"><span>cutting-edge</span></span>
-          <span class="line"><span>solutions<i class="blink">_</i></span></span>
-        </h1>
-        <div class="hero__cta">
-          <a href="#solutions" class="btn" data-magnetic><span>Learn more</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <p class="hero__note">From intelligent motor controls to the Internet of Things — for any industry.</p>
-        </div>
-      </div>
+  <main>
+    <!-- 01 HERO -->
+    <section class="sec hero" id="top" data-form="flux" data-x="0.32" data-y="-0.12" data-color="blue" data-name="SIGNAL">
+      <h1 class="hero__title" data-intro-lines>
+        <span class="ln"><span>We transform</span></span>
+        <span class="ln"><span>your <em>needs</em> into</span></span>
+        <span class="ln"><span><s>//</s> cutting-edge</span></span>
+        <span class="ln"><span>solutions</span></span>
+      </h1>
+      <aside class="hero__aside" data-intro-fade>
+        <div class="hero__aside-top"><span>(A)</span><span>[1990—2026]</span></div>
+        <p>From intelligent motor controls to the Internet of Things — custom electronics design and manufacturing for any industry.</p>
+        <a href="#contact" class="btn" data-magnetic><span data-scramble>start a project</span></a>
+      </aside>
     </section>
 
-    <!-- ============ MANIFESTO ============ -->
-    <section class="manifesto" id="about">
-      <div class="wrap">
-        <p class="label">[ 00 ] — About ATech</p>
-        <p class="manifesto__text" data-words>
-          For more than three decades we have been delivering solutions that turn our partners’ challenges into success stories. We listen, we engineer, we manufacture — and we take full responsibility for every board that leaves our lines in Materija.
-        </p>
-        <div class="manifesto__beliefs">
-          <span>We believe in</span>
-          <ul>
-            <li>Intelligent solutions</li>
-            <li>Reliable partnership</li>
-            <li>Service excellence</li>
-            <li>Green environment</li>
-          </ul>
-        </div>
+    <!-- 02 SIGNAL / dashboard -->
+    <section class="sec signal" id="signal" data-form="ring" data-x="0" data-y="0.02" data-scale="0.92" data-color="ice" data-name="TELEMETRY">
+      <div class="signal__core">
+        <span class="signal__k">delivery reliability</span>
+        <b class="signal__v"><span data-count="99">0</span><sup>%+</sup></b>
+        <span class="signal__k">as reported by our partners</span>
       </div>
-    </section>
-
-    <!-- ============ SOLUTIONS (horizontal) ============ -->
-    <section class="nova" id="solutions" tabindex="0" role="region" aria-roledescription="carousel" aria-label="ATech solutions"></section>
-
-    <!-- ============ PROCESS ============ -->
-    <section class="process" id="process">
-      <div class="process__pin">
-        <div class="process__left">
-          <p class="label">[ 02 ] — PCB assembly process</p>
-          <h2 class="display display--sm">Every stage feeds the next. <em>Quality is a loop,</em> not a checkpoint.</h2>
-          <ol class="steps">
-            <li class="is-active"><span>01</span><div><h4>Solder paste</h4><p>Before components are added, the board is coated with solder paste on the component pads.</p></div></li>
-            <li><span>02</span><div><h4>Pick &amp; place</h4><p>Machines with reels of components pick each part and place it precisely, programmed straight from the PCB design data.</p></div></li>
-            <li><span>03</span><div><h4>Automatic optical inspection</h4><p>AOI detects poor joints, misplaced components and, in some cases, the wrong component.</p></div></li>
-            <li><span>04</span><div><h4>THT process</h4><p>Through-hole components are placed by hand and soldered onto pads on the reverse side.</p></div></li>
-            <li><span>05</span><div><h4>Test</h4><p>In-circuit test (ICT), functional test and thermal stress test — before anything leaves the factory.</p></div></li>
-          </ol>
-        </div>
-        <div class="process__right">
-          <svg class="process__trace" viewBox="0 0 400 600" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M20 0 V120 L80 180 V300 L140 360 V480 L80 540 V600" />
-            <path class="lit" d="M20 0 V120 L80 180 V300 L140 360 V480 L80 540 V600" />
-          </svg>
-          <div class="process__stack">
-            <figure class="is-active"><img src="assets/img/pcb.jpg" alt="Macro of a printed circuit board" /></figure>
-            <figure><img src="assets/img/smt.jpg" alt="Pick and place machine" /></figure>
-            <figure><img src="assets/img/aoi.jpg" alt="Automatic optical inspection scanning a board" /></figure>
-            <figure><img src="assets/img/pcb.jpg" alt="Through-hole components on a board" style="object-position: 15% 80%" /></figure>
-            <figure><img src="assets/img/lab.jpg" alt="Board under functional test" /></figure>
+      <div class="glass g1 est" data-reveal data-cursor="scrub">
+        <div class="sla__top"><span class="g__k">established</span><span class="est__age" data-est-age>-- yrs</span></div>
+        <b class="g__v" data-count="1990">0</b>
+        <div class="est__rail" aria-hidden="true"><span class="est__track"><i class="est__pulse"></i></span><i class="est__cur" data-est-cur></i></div>
+        <div class="est__years" aria-hidden="true"><span>1990</span><span data-est-now>2026</span></div>
+        <p class="est__read"><b data-est-y>1990</b><span data-est-t>Slovenian–Swiss joint venture, Materija</span></p>
+      </div>
+      <div class="glass g2 sla" data-reveal data-cursor="inquire">
+        <div class="sla__top"><span class="g__k">response time</span><span class="sla__live"><i></i>live</span></div>
+        <div class="sla__dial">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><g data-ticks></g><circle class="sla__ring" cx="100" cy="100" r="62" /></svg>
+          <div class="sla__mid">
+            <b class="sla__h"><span data-sla-h>48</span>h</b>
+            <span class="sla__k">reply by</span>
+            <span class="sla__by" data-sla-by>--- -- --- · --:--</span>
           </div>
         </div>
+        <p class="sla__note">Write to us now — we respond to every inquiry within 48 hours.</p>
+        <a href="#contact" class="sla__cta"><span>start your inquiry</span><i>→</i></a>
       </div>
-    </section>
-
-    <!-- ============ NUMBERS ============ -->
-    <section class="numbers">
-      <div class="wrap numbers__grid">
-        <div class="num"><b data-num="1990">0</b><span>Founded as a Slovenian–Swiss joint venture</span></div>
-        <div class="num"><b><i data-num="99">0</i>%+</b><span>Delivery reliability reported by our partners</span></div>
-        <div class="num"><b><i data-num="20">0</i>+</b><span>Years of partnership with key clients</span></div>
-        <div class="num"><b><i data-num="48">0</i>h</b><span>Response to every inquiry</span></div>
+      <div class="glass g3 thumb" data-reveal style="--img:url(assets/img/smt.jpg)">
+        <span class="g__k">key partnerships</span>
+        <b class="g__v"><span data-count="20">0</span>+ yrs</b>
+        <span class="chip">with key clients</span>
       </div>
-    </section>
-
-    <!-- ============ STORIES ============ -->
-    <section class="stories" id="stories">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="label">[ 03 ] — Success stories</p>
-          <h2 class="display">Explore the ATech universe of <em>smart electronics.</em></h2>
-          <p class="muted">You know the destination. We know how to get there. From intelligent motor controls to the Internet of Things – we can find a solution to every need in any industry.</p>
-        </div>
-        <ul class="clients">
-          <li><a href="https://www.atech.si/imp-pumps/" data-img="assets/img/lab.jpg"><span class="i">01</span><span class="n">IMP Pumps</span><span class="c">Motor controls</span><span class="a">→</span></a></li>
-          <li><a href="https://www.atech.si/johnson-controls/" data-img="assets/img/smt.jpg"><span class="i">02</span><span class="n">Johnson Controls</span><span class="c">HVAC</span><span class="a">→</span></a></li>
-          <li><a href="https://www.atech.si/fotona/" data-img="assets/img/aoi.jpg"><span class="i">03</span><span class="n">Fotona</span><span class="c">Medical</span><span class="a">→</span></a></li>
-          <li><a href="https://www.atech.si/fumis/" data-img="assets/img/karst.jpg"><span class="i">04</span><span class="n">Fumis</span><span class="c">Biomass combustion</span><span class="a">→</span></a></li>
-          <li><a href="https://www.atech.si/hyla-2/" data-img="assets/img/pcb.jpg"><span class="i">05</span><span class="n">Hyla</span><span class="c">Home appliances</span><span class="a">→</span></a></li>
-          <li><a href="https://www.atech.si/cimos/" data-img="assets/img/lab.jpg"><span class="i">06</span><span class="n">Cimos</span><span class="c">Automotive</span><span class="a">→</span></a></li>
-          <li><a href="https://www.atech.si/mesi/" data-img="assets/img/aoi.jpg"><span class="i">07</span><span class="n">Mesi</span><span class="c">Medical</span><span class="a">→</span></a></li>
-          <li><a href="https://www.atech.si/bsh/" data-img="assets/img/smt.jpg"><span class="i">08</span><span class="n">B/S/H</span><span class="c">Home appliances</span><span class="a">→</span></a></li>
+      <div class="glass g4 thumb" data-reveal style="--img:url(assets/img/aoi.jpg)">
+        <span class="g__k">certified</span>
+        <b class="g__v g__v--sm">ISO 9001<br/>ISO 14001</b>
+        <span class="chip">ISO 13485 dev. process</span>
+      </div>
+      <div class="glass g5" data-reveal>
+        <span class="g__k">lines</span>
+        <ul class="status">
+          <li><i></i>SMT · inert-gas reflow</li>
+          <li><i></i>THT · wave soldering</li>
+          <li><i></i>AOI · ICT · functional</li>
         </ul>
-        <a href="https://www.atech.si/references/" class="link link--lg" data-hover>See all references <i>→</i></a>
-      </div>
-      <div class="float-img" aria-hidden="true"><div class="float-img__inner"><img alt="" /></div></div>
-    </section>
-
-    <!-- ============ TESTIMONIALS ============ -->
-    <section class="voices" id="voices">
-      <div class="wrap bento">
-        <div class="bento__head">
-          <p class="label">[ 04 ] — In their words</p>
-          <h2 class="bento__title">Partnerships measured in <em>decades.</em></h2>
-          <p class="bento__hint"><span data-bq-count>01</span> / 07 · Select a partner to read</p>
-        </div>
-        <figure class="bq is-feature" data-bq="0" data-cursor="Read">
-          <span class="bq__co">Danfoss</span>
-          <p class="bq__ex">“more than 99% reliability of deliveries”</p>
-          <blockquote class="bq__q">“Atech is delivering us high quality products with more than 99% reliability of deliveries. Our successful business cooperation is based on reliable logistics approaches and risk management that Atech has efficiently been managing for more than 10 years. With such a reliable business partner we have been able to focus on our business and increase our sales and market share.”</blockquote>
-          <figcaption><b>Aleksander Zalaznik</b><span>Vice President, Danfoss</span></figcaption>
-        </figure>
-        <figure class="bq" data-bq="1" data-cursor="Read">
-          <span class="bq__co">Mesi</span>
-          <p class="bq__ex">“assemble a PCB exactly as you have designed it”</p>
-          <blockquote class="bq__q">“When you are developing a medical device, it is of the utmost importance to have a business partner which can assemble a PCB exactly as you have designed it. ATech has been adaptable with regard to negotiating and shown great understanding of our requirements. They are now providing us with the comprehensive PCBs needed for the production of ABPI MDs.”</blockquote>
-          <figcaption><b>Daša Košec</b><span>Chief Marketing Officer, Mesi</span></figcaption>
-        </figure>
-        <figure class="bq" data-bq="2" data-cursor="Read">
-          <span class="bq__co">Fotona</span>
-          <p class="bq__ex">“they have become our key partner”</p>
-          <blockquote class="bq__q">“We have been working with ATech for more than 20 years. During this time, they have become our key partner in the production of our complex electronic boards that we build into our products. ATech has proven to us that they master change management in both fields of technical documentation and material base, they are focused on a continuous quality improvement process and that they play an active role in our relationship.”</blockquote>
-          <figcaption><b>Branko Tovornik</b><span>Purchasing Manager, Fotona</span></figcaption>
-        </figure>
-        <figure class="bq" data-bq="3" data-cursor="Read">
-          <span class="bq__co">Cimos</span>
-          <p class="bq__ex">“our invaluable partner”</p>
-          <blockquote class="bq__q">“When Cimos stepped into the market of automotive mechatronics products, ATech was our invaluable partner with its extensive knowledge of advanced electronic hardware design and complex software algorithms. With a joint team of excellent engineers we were able to develop a safety-critical car brake component which we believe is just the first step in our long and successful cooperation.”</blockquote>
-          <figcaption><b>Damjan Boštjančič</b><span>Central R&amp;D – Testing Laboratory, Cimos</span></figcaption>
-        </figure>
-        <figure class="bq" data-bq="4" data-cursor="Read">
-          <span class="bq__co">Gold Club</span>
-          <p class="bq__ex">“one of the most reliable and best quality”</p>
-          <blockquote class="bq__q">“Among all of the local and foreign suppliers we cooperate with, ATech is one of the most reliable and best quality. Its on-time deliveries, care for the high quality and reliability of agreements are the attributes that play a crucial role in our decision to gladly continue working with ATech in the future.”</blockquote>
-          <figcaption><b>Boštjan Stopar, M.Sc.</b><span>General Manager, Gold Club</span></figcaption>
-        </figure>
-        <figure class="bq" data-bq="5" data-cursor="Read">
-          <span class="bq__co">IMP Pumps</span>
-          <p class="bq__ex">“an effective and reliable motor control”</p>
-          <blockquote class="bq__q">“We were looking for a reliable product with high flexibility in terms of supply chain abilities. ATech helped us develop an effective and reliable motor control. Despite the uncertainties about the market’s behaviour, ATech has managed to overcome all problems related to the long-term deliveries of certain components in addition to handling all of our product inquiries through its supply chain.”</blockquote>
-          <figcaption><b>Miha Benčina</b><span>Purchasing Manager, IMP Pumps</span></figcaption>
-        </figure>
-        <figure class="bq" data-bq="6" data-cursor="Read">
-          <span class="bq__co">Gema</span>
-          <p class="bq__ex">“an important part of our future plans”</p>
-          <blockquote class="bq__q">“As a valued supplier, ATech is an important part of our future plans.”</blockquote>
-          <figcaption><b>Egger Bruno</b><span>Operations Manager, GEMA</span></figcaption>
-        </figure>
       </div>
     </section>
 
-    <!-- ============ MILESTONES ============ -->
-    <section class="milestones">
-      <div class="milestones__pin">
-        <div class="wrap milestones__head">
-          <p class="label">[ 05 ] — Milestones &amp; growth</p>
-          <h2 class="display display--sm">Thirty-plus years, <em>one continuous signal.</em></h2>
+    <!-- 03 ABOUT -->
+    <section class="sec about" id="about" data-form="dust" data-x="0.15" data-color="dim" data-fade="0.35" data-name="MANIFESTO">
+      <p class="about__text" data-decode>For more than three decades we have been delivering solutions that turn our partners’ challenges into success stories. We listen, we engineer, we manufacture — and we take full responsibility for every board that leaves our lines in Materija.</p>
+      <div class="about__grid">
+        <div class="about__mv">
+          <span class="g__k">mission</span>
+          <p>Improve user experience by providing <em>innovative and sustainable</em> solutions.</p>
         </div>
-        <div class="milestones__rail">
-          <div class="milestones__line"><i></i></div>
-          <ol class="milestones__track">
-            <li><b>1990</b><p>Company established as a Slovenian–Swiss joint venture</p></li>
-            <li><b>1998</b><p>First fully automated SMD line</p></li>
-            <li><b>2001</b><p>Certified for ISO 9001</p></li>
-            <li><b>2005</b><p>»Best entrepreneurship idea« award · First connectivity platform · Motor controls R&amp;D laboratory</p></li>
-            <li><b>2006</b><p>Flying probe in-circuit test line installed</p></li>
-            <li><b>2007</b><p>Certified for ISO 14001</p></li>
-            <li><b>2008</b><p>First FUMIS combustion biomass controller · Among 101 top employers in “Zlata nit”</p></li>
-            <li><b>2009</b><p>Horus prize for the most socially responsible medium-sized company</p></li>
-            <li><b>2011</b><p>“Hidden champion” recognition for best business practices</p></li>
-            <li><b>2013</b><p>Award for the best business idea with the product Florian</p></li>
-            <li><b>2015</b><p>New additional SMD line</p></li>
-            <li><b>2016</b><p>Acquisition of Perles’ activities and resources</p></li>
-            <li><b>2024</b><p>Joins consortium to develop efficient, eco-friendly pellet stoves</p></li>
-          </ol>
+        <div class="about__mv">
+          <span class="g__k">vision</span>
+          <p>We set user trends and create <em>environmentally friendly</em> devices.</p>
         </div>
+        <ul class="about__beliefs">
+          <li><span>we believe in</span></li>
+          <li>Intelligent solutions</li>
+          <li>Reliable partnership</li>
+          <li>Service excellence</li>
+          <li>Green environment</li>
+        </ul>
       </div>
     </section>
 
-    <!-- ============ VALUES ============ -->
-    <section class="values">
-      <div class="wrap">
-        <div class="mv">
-          <div><p class="label">Mission</p><p class="mv__t">Improve user experience by providing <em>innovative and sustainable</em> solutions.</p></div>
-          <div><p class="label">Vision</p><p class="mv__t">We set user trends and create <em>environmentally friendly</em> devices.</p></div>
+    <!-- 04 SOLUTIONS (pinned, copper coil) -->
+    <section class="sec solutions" id="solutions" data-form="coil" data-x="0.17" data-color="copper" data-tilt="0.25" data-name="SOLUTIONS">
+      <div class="solutions__pin">
+        <ol class="sol-index" aria-hidden="true"><li class="on">01</li><li>02</li><li>03</li></ol>
+        <div class="sol-stack">
+          <article class="sol on">
+            <h2 class="sol__t"><span>Cutting-edge</span><span><s>//</s> electronics design</span></h2>
+            <p>Draw inspiration from our brilliant R&amp;D team of engineers who are eager to share their know-how and expertise to turn your vision into smart electronics solutions. For any industry.</p>
+            <ul class="sol__tags"><li>digital · analogue · mixed signal</li><li>high voltage · high current · RF</li><li>PCB design</li><li>DFM</li><li>life-cycle support</li></ul>
+            <a href="https://www.atech.si/solutions/cutting-edge-electronics-design/" class="link" data-scramble>explore design ↗</a>
+          </article>
+          <article class="sol">
+            <h2 class="sol__t"><span>Electronics</span><span><s>//</s> manufacturing</span></h2>
+            <p>Get the most flexible and reliable partner that will develop and manufacture smart electronics in a cost-effective way and with a short time to market. Satisfaction guaranteed.</p>
+            <ul class="sol__tags"><li>SMT · THT assembly</li><li>AOI</li><li>ICT · functional · thermal stress</li><li>box build · worldwide delivery</li></ul>
+            <a href="https://www.atech.si/solutions/electronics-manufacturing-services/" class="link" data-scramble>explore EMS ↗</a>
+          </article>
+          <article class="sol">
+            <h2 class="sol__t"><span>A reliable</span><span><s>//</s> partner</span></h2>
+            <p>Take your business to the next level with solutions, answers and technologies that will help you stand out from your competitors. We have been doing this since 1990.</p>
+            <ul class="sol__tags"><li>supply chain management</li><li>industrialisation</li><li>life cycle management</li><li>logistic services</li></ul>
+            <a href="https://www.atech.si/solutions/a-reliable-partner/" class="link" data-scramble>explore partnership ↗</a>
+          </article>
         </div>
-        <p class="label">Corporate values</p>
-        <div class="vgrid">
-          <article class="v" data-tilt><span>01</span><h4>Innovation</h4><p>We create new value for our customers by realizing our ideas, think creatively and constantly strive to improve the user experience.</p></article>
-          <article class="v" data-tilt><span>02</span><h4>Agility</h4><p>We respond quickly and optimally to the demands and wishes of our customers. Change is a catalyst for our development.</p></article>
-          <article class="v" data-tilt><span>03</span><h4>Responsibility</h4><p>We take full responsibility for the results of our work, the work of our colleagues and the company as a whole.</p></article>
-          <article class="v" data-tilt><span>04</span><h4>Team work &amp; partnership</h4><p>We develop long-term relationships and, through a united corporate culture, create a strong company.</p></article>
-          <article class="v" data-tilt><span>05</span><h4>Trust</h4><p>Clear and open communication, and respectful, genuine relationships between employees and partners.</p></article>
-          <article class="v" data-tilt><span>06</span><h4>Reliability</h4><p>My word is my bond — what I say I will do will be done within the deadline and to a high standard.</p></article>
-        </div>
+        <figure class="sol-photo glass" aria-hidden="true">
+          <img src="assets/img/lab.jpg" alt="" class="on" />
+          <img src="assets/img/smt.jpg" alt="" />
+          <img src="assets/img/reels.jpg" alt="" />
+          <figcaption><span data-sol-cap>R&amp;D LAB · MATERIJA</span><span class="rec">● LIVE</span></figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- ============ NEWS ============ -->
-    <section class="news" id="news">
-      <div class="wrap">
+    <!-- 05 PROCESS (pinned, PCB lattice) -->
+    <section class="sec process" id="process" data-form="grid" data-x="0.4" data-y="-0.05" data-scale="0.82" data-color="cyan" data-pulse="1" data-name="ASSEMBLY">
+      <div class="process__pin">
+        <h2 class="process__h">Every stage feeds the next. <em>Quality is a loop</em>, not a checkpoint.</h2>
+        <ol class="stages">
+          <li class="on"><span>01</span><b data-scramble-auto>solder paste</b><p>Before components are added, the board is coated with solder paste on the component pads.</p></li>
+          <li><span>02</span><b data-scramble-auto>pick &amp; place</b><p>Machines with reels of components pick each part and place it precisely, programmed straight from the PCB design data.</p></li>
+          <li><span>03</span><b data-scramble-auto>automatic optical inspection</b><p>AOI detects poor joints, misplaced components and, in some cases, the wrong component.</p></li>
+          <li><span>04</span><b data-scramble-auto>tht process</b><p>Through-hole components are placed by hand and soldered onto pads on the reverse side.</p></li>
+          <li><span>05</span><b data-scramble-auto>test</b><p>In-circuit test (ICT), functional test and thermal stress test — before anything leaves the factory.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 06 REFERENCES + VOICES -->
+    <section class="sec stories" id="stories" data-form="flux" data-x="0.55" data-y="0.1" data-scale="0.85" data-color="blue" data-name="REFERENCES">
+      <h2 class="big">Explore the ATech universe of <em>smart electronics.</em></h2>
+      <ul class="clients">
+        <li><a href="https://www.atech.si/imp-pumps/" data-img="assets/img/power.jpg"><span>01</span><b data-scramble>IMP Pumps</b><i>motor controls</i></a></li>
+        <li><a href="https://www.atech.si/johnson-controls/" data-img="assets/img/smt.jpg"><span>02</span><b data-scramble>Johnson Controls</b><i>HVAC</i></a></li>
+        <li><a href="https://www.atech.si/fotona/" data-img="assets/img/aoi.jpg"><span>03</span><b data-scramble>Fotona</b><i>medical</i></a></li>
+        <li><a href="https://www.atech.si/fumis/" data-img="assets/img/karst.jpg"><span>04</span><b data-scramble>Fumis</b><i>biomass combustion</i></a></li>
+        <li><a href="https://www.atech.si/hyla-2/" data-img="assets/img/pcb.jpg"><span>05</span><b data-scramble>Hyla</b><i>home appliances</i></a></li>
+        <li><a href="https://www.atech.si/cimos/" data-img="assets/img/lab.jpg"><span>06</span><b data-scramble>Cimos</b><i>automotive</i></a></li>
+        <li><a href="https://www.atech.si/mesi/" data-img="assets/img/boxbuild.jpg"><span>07</span><b data-scramble>Mesi</b><i>medical</i></a></li>
+        <li><a href="https://www.atech.si/bsh/" data-img="assets/img/reels.jpg"><span>08</span><b data-scramble>B/S/H</b><i>home appliances</i></a></li>
+      </ul>
+      <a href="https://www.atech.si/references/" class="link" data-scramble>see all references ↗</a>
+
+      <div class="term glass" id="voices">
+        <div class="term__bar"><i></i><i></i><i></i><span>~/atech/voices</span></div>
+        <div class="term__tabs" role="tablist" aria-label="Testimonials"></div>
+        <div class="term__body">
+          <p class="term__cmd">&gt; cat <span data-term-file>danfoss.txt</span></p>
+          <blockquote class="term__q" data-term-q aria-live="polite"></blockquote>
+          <p class="term__by" data-term-by></p>
+        </div>
+      </div>
+      <script type="application/json" id="voices-data">[
+        {"co":"Danfoss","q":"Atech is delivering us high quality products with more than 99% reliability of deliveries. Our successful business cooperation is based on reliable logistics approaches and risk management that Atech has efficiently been managing for more than 10 years. With such a reliable business partner we have been able to focus on our business and increase our sales and market share.","by":"Aleksander Zalaznik — Vice President, Danfoss"},
+        {"co":"Mesi","q":"When you are developing a medical device, it is of the utmost importance to have a business partner which can assemble a PCB exactly as you have designed it. ATech has been adaptable with regard to negotiating and shown great understanding of our requirements. They are now providing us with the comprehensive PCBs needed for the production of ABPI MDs.","by":"Daša Košec — Chief Marketing Officer, Mesi"},
+        {"co":"Fotona","q":"We have been working with ATech for more than 20 years. During this time, they have become our key partner in the production of our complex electronic boards that we build into our products. ATech has proven to us that they master change management in both fields of technical documentation and material base, they are focused on a continuous quality improvement process and that they play an active role in our relationship.","by":"Branko Tovornik — Purchasing Manager, Fotona"},
+        {"co":"Cimos","q":"When Cimos stepped into the market of automotive mechatronics products, ATech was our invaluable partner with its extensive knowledge of advanced electronic hardware design and complex software algorithms. With a joint team of excellent engineers we were able to develop a safety-critical car brake component which we believe is just the first step in our long and successful cooperation.","by":"Damjan Boštjančič — Central R&D – Testing Laboratory, Cimos"},
+        {"co":"Gold Club","q":"Among all of the local and foreign suppliers we cooperate with, ATech is one of the most reliable and best quality. Its on-time deliveries, care for the high quality and reliability of agreements are the attributes that play a crucial role in our decision to gladly continue working with ATech in the future.","by":"Boštjan Stopar, M.Sc. — General Manager, Gold Club"},
+        {"co":"IMP Pumps","q":"We were looking for a reliable product with high flexibility in terms of supply chain abilities. ATech helped us develop an effective and reliable motor control. Despite the uncertainties about the market’s behaviour, ATech has managed to overcome all problems related to the long-term deliveries of certain components in addition to handling all of our product inquiries through its supply chain.","by":"Miha Benčina — Purchasing Manager, IMP Pumps"},
+        {"co":"Gema","q":"As a valued supplier, ATech is an important part of our future plans.","by":"Egger Bruno — Operations Manager, GEMA"}
+      ]</script>
+      <div class="peek" aria-hidden="true"><img alt="" /></div>
+    </section>
+
+    <!-- 07 MILESTONES -->
+    <section class="sec log" id="milestones" data-form="coil" data-x="-0.66" data-scale="0.9" data-color="blue" data-tilt="-0.2" data-name="CHANGELOG">
+      <h2 class="big">Thirty-plus years, <em>one continuous signal.</em></h2>
+      <ol class="log__list">
+        <li><time>2024</time><span>Joins consortium to develop efficient, eco-friendly pellet stoves</span></li>
+        <li><time>2016</time><span>Acquisition of Perles’ activities and resources</span></li>
+        <li><time>2015</time><span>New additional SMD line</span></li>
+        <li><time>2013</time><span>Award for the best business idea with the product Florian</span></li>
+        <li><time>2011</time><span>“Hidden champion” recognition for best business practices</span></li>
+        <li><time>2009</time><span>Horus prize for the most socially responsible medium-sized company</span></li>
+        <li><time>2008</time><span>First FUMIS combustion biomass controller · Among 101 top employers in “Zlata nit”</span></li>
+        <li><time>2007</time><span>Certified for ISO 14001</span></li>
+        <li><time>2006</time><span>Flying probe in-circuit test line installed</span></li>
+        <li><time>2005</time><span>»Best entrepreneurship idea« award · First connectivity platform · Motor controls R&amp;D laboratory</span></li>
+        <li><time>2001</time><span>Certified for ISO 9001</span></li>
+        <li><time>1998</time><span>First fully automated SMD line</span></li>
+        <li><time>1990</time><span>Company established as a Slovenian–Swiss joint venture</span></li>
+      </ol>
+      <div class="news">
         <div class="news__head">
-          <p class="label">[ 06 ] — Stay up to date</p>
-          <a href="https://www.atech.si/news/articles/" class="link" data-hover>All news <i>→</i></a>
+          <span class="news__live"><i></i>newsroom</span>
+          <a href="https://www.atech.si/news/articles/" class="link" data-scramble>all news ↗</a>
         </div>
-        <div class="news__grid">
-          <a class="post" href="https://www.atech.si/news/articles/read-articles/?id=24766" data-cursor="Read">
-            <div class="post__img"><img src="assets/img/aoi.jpg" alt="" loading="lazy" /></div>
-            <time>07 · 05 · 2024</time>
-            <h3>ATech BIH participates in opening of SMIC in Novi Sad</h3>
-          </a>
-          <a class="post" href="https://www.atech.si/atech-joins-consortium-to-develop-efficient-and-eco-friendly-pellet-stoves/" data-cursor="Read">
-            <div class="post__img"><img src="assets/img/karst.jpg" alt="" loading="lazy" /></div>
-            <time>05 · 10 · 2024</time>
-            <h3>ATech joins consortium to develop efficient and eco-friendly pellet stoves</h3>
-          </a>
-          <form class="enews" data-mailto="info@atech.si" data-subject="E-news subscription">
-            <p class="label">E-news</p>
-            <h3>Subscribe to e-news</h3>
-            <label class="field"><input type="email" name="email" required placeholder=" " /><span>Your e-mail address</span></label>
-            <button class="btn btn--block" type="submit" data-magnetic><span>Subscribe</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          </form>
-        </div>
+        <a class="glass news__item news__item--feature thumb" data-cursor="read" href="https://www.atech.si/atech-joins-consortium-to-develop-efficient-and-eco-friendly-pellet-stoves/" style="--img:url(assets/img/karst.jpg)">
+          <i class="news__scan" aria-hidden="true"></i>
+          <span class="news__date"><b>05.10</b><span>2024 · news</span></span>
+          <b class="news__t" data-scramble>ATech joins consortium to develop efficient and eco-friendly pellet stoves</b>
+          <span class="chip">read <i>↗</i></span>
+        </a>
+        <a class="glass news__item thumb" data-cursor="read" href="https://www.atech.si/news/articles/read-articles/?id=24766" style="--img:url(assets/img/aoi.jpg)">
+          <i class="news__scan" aria-hidden="true"></i>
+          <span class="news__date"><b>07.05</b><span>2024 · news</span></span>
+          <b class="news__t" data-scramble>ATech BIH participates in opening of SMIC in Novi Sad</b>
+          <span class="chip">read <i>↗</i></span>
+        </a>
+        <a class="glass news__item news__item--jobs" data-cursor="apply" href="https://atech.si/zaposlitvene-priloznosti/en_us/">
+          <i class="news__scan" aria-hidden="true"></i>
+          <span class="g__k">job offer</span>
+          <span class="job__cmd">&gt; ./join --team atech</span>
+          <b class="job__t" data-job>We are looking for new team members. Interested?</b>
+          <span class="chip chip--hot">apply now <i>↗</i></span>
+          <span class="job__tape" aria-hidden="true"><span>join the team · materija · slovenia · join the team · materija · slovenia · </span><span>join the team · materija · slovenia · join the team · materija · slovenia · </span></span>
+        </a>
       </div>
     </section>
 
-    <!-- ============ CAREERS BAND ============ -->
-    <a class="jobs" href="https://atech.si/zaposlitvene-priloznosti/en_us/" data-cursor="Apply">
-      <div class="jobs__inner">
-        <span>Job offer</span><i>●</i><span>We are looking for new team members. Interested?</span><em>Apply now →</em><i>●</i>
-        <span>Job offer</span><i>●</i><span>We are looking for new team members. Interested?</span><em>Apply now →</em><i>●</i>
+    <!-- 08 CONTACT -->
+    <section class="sec contact" id="contact" data-form="globe" data-x="0.48" data-color="ice" data-name="CONTACT">
+      <h2 class="contact__h"><span>Become a</span><span><s>//</s> <em>game changer!</em></span></h2>
+      <p class="contact__lead">Find out how we can help you turn your product into a technologically advanced, customer-friendly solution. We will respond to your inquiry within 48 hours.</p>
+      <div class="contact__grid">
+        <form class="glass inquiry" data-mailto="info@atech.si" data-subject="Inquiry from atech.si">
+          <label><span>name &amp; surname</span><input name="name" required /></label>
+          <label><span>company</span><input name="company" required /></label>
+          <label><span>e-mail</span><input name="email" type="email" required /></label>
+          <label><span>phone (optional)</span><input name="phone" /></label>
+          <fieldset class="opts">
+            <legend>i’m interested in</legend>
+            <label><input type="checkbox" name="topic" value="Electronics design" /><span>electronics design</span></label>
+            <label><input type="checkbox" name="topic" value="Manufacturing services" /><span>manufacturing services</span></label>
+            <label><input type="checkbox" name="topic" value="Partnership" /><span>partnership</span></label>
+            <label><input type="checkbox" name="topic" value="Fumis" /><span>fumis</span></label>
+          </fieldset>
+          <label class="wide"><span>tell us about your challenge</span><textarea name="message" rows="3" required></textarea></label>
+          <button class="btn btn--solid" type="submit" data-magnetic><span data-scramble>send inquiry →</span></button>
+        </form>
+        <dl class="contacts glass">
+          <div><dt>headquarters</dt><dd>ATech elektronika d.o.o.<br/>Bač pri Materiji 30<br/>SI-6242 Materija, Slovenia</dd></div>
+          <div><dt>general</dt><dd><a href="tel:+38682008800">+386 8 200 88 00</a><br/><a href="mailto:info@atech.si">info@atech.si</a></dd></div>
+          <div><dt>strategic sales — EMS/ODM</dt><dd>Sara Turk<br/><a href="tel:+38682008827">+386 (0)8 200 88 27</a><br/><a href="mailto:sara.turk@atech.si">sara.turk@atech.si</a></dd></div>
+          <div><dt>fumis product manager</dt><dd>Dimitrije Nikolić<br/><a href="tel:+38651395304">+386 (0)51 395 304</a><br/><a href="mailto:dimitrije.nikolic@fumis.si">dimitrije.nikolic@fumis.si</a></dd></div>
+        </dl>
       </div>
-    </a>
-
-    <!-- ============ CONTACT ============ -->
-    <section class="contact" id="contact">
-      <div class="wrap">
-        <p class="label">[ 07 ] — Contact</p>
-        <h2 class="mega" data-split-chars>Become a<br/><em>game changer!</em></h2>
-        <div class="contact__grid">
-          <div class="contact__info">
-            <p class="lead">Find out how we can help you turn your product into a technologically advanced, customer-friendly solution. We will respond to your inquiry within 48 hours.</p>
-            <dl>
-              <div><dt>Headquarters</dt><dd>ATech elektronika d.o.o.<br/>Bač pri Materiji 30<br/>SI-6242 Materija, Slovenia</dd></div>
-              <div><dt>General</dt><dd><a href="tel:+38682008800" data-hover>+386 8 200 88 00</a><br/><a href="mailto:info@atech.si" data-hover>info@atech.si</a></dd></div>
-              <div><dt>Strategic sales — EMS/ODM</dt><dd>Sara Turk<br/><a href="tel:+38682008827" data-hover>+386 (0)8 200 88 27</a><br/><a href="mailto:sara.turk@atech.si" data-hover>sara.turk@atech.si</a></dd></div>
-              <div><dt>Fumis product manager</dt><dd>Dimitrije Nikolić<br/><a href="tel:+38651395304" data-hover>+386 (0)51 395 304</a><br/><a href="mailto:dimitrije.nikolic@fumis.si" data-hover>dimitrije.nikolic@fumis.si</a></dd></div>
-            </dl>
-          </div>
-          <form class="inquiry" data-mailto="info@atech.si" data-subject="Inquiry from atech.si">
-            <label class="field"><input name="name" required placeholder=" " /><span>Name &amp; surname</span></label>
-            <label class="field"><input name="company" required placeholder=" " /><span>Company</span></label>
-            <label class="field"><input name="email" type="email" required placeholder=" " /><span>E-mail</span></label>
-            <label class="field"><input name="phone" placeholder=" " /><span>Phone (optional)</span></label>
-            <fieldset class="chips">
-              <legend>I’m interested in</legend>
-              <label><input type="checkbox" name="topic" value="Electronics design" /><span>Electronics design</span></label>
-              <label><input type="checkbox" name="topic" value="Manufacturing services" /><span>Manufacturing services</span></label>
-              <label><input type="checkbox" name="topic" value="Partnership" /><span>Partnership</span></label>
-              <label><input type="checkbox" name="topic" value="Fumis" /><span>Fumis</span></label>
-            </fieldset>
-            <label class="field field--area"><textarea name="message" rows="4" required placeholder=" "></textarea><span>Tell us about your challenge</span></label>
-            <button class="btn btn--xl" type="submit" data-magnetic><span>Send inquiry</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          </form>
-        </div>
-      </div>
+      <footer class="foot">
+        <nav>
+          <a href="https://www.atech.si/legal-notice/">legal notice</a>
+          <a href="https://www.atech.si/wp-content/uploads/2026/03/Certifikati-ENG.pdf">certificates</a>
+          <a href="https://atech.si/zaposlitvene-priloznosti/en_us/">careers</a>
+          <a href="https://www.facebook.com/atechdoo/">facebook</a>
+          <a href="https://www.linkedin.com/company/1110058">linkedin</a>
+          <a href="http://www.fumis.si/">fumis</a>
+          <a href="http://www.perles.com/">perles</a>
+          <a href="https://www.atech.si?lang=sl_si">SI</a>
+        </nav>
+        <span>© 2026 ATech elektronika d.o.o. — all rights reserved.</span>
+      </footer>
     </section>
-
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer">
-      <div class="wrap footer__grid">
-        <div class="footer__brand">
-          <span class="brand__word"><b>A</b>tech</span>
-          <span class="brand__sub">electronics</span>
-        </div>
-        <nav>
-          <a href="#solutions" data-hover>Solutions</a>
-          <a href="#stories" data-hover>References</a>
-          <a href="#about" data-hover>About</a>
-          <a href="#contact" data-hover>Contact</a>
-          <a href="https://atech.si/zaposlitvene-priloznosti/en_us/" data-hover>Careers</a>
-          <a href="https://www.atech.si/legal-notice/" data-hover>Legal notice</a>
-          <a href="https://www.atech.si/wp-content/uploads/2026/03/Certifikati-ENG.pdf" data-hover>Certificates</a>
-        </nav>
-        <nav>
-          <a href="https://www.facebook.com/atechdoo/" data-hover>Facebook</a>
-          <a href="https://www.linkedin.com/company/1110058" data-hover>LinkedIn</a>
-          <a href="http://www.fumis.si/" data-hover>Fumis</a>
-          <a href="http://www.perles.com/" data-hover>Perles</a>
-        </nav>
-      </div>
-      <div class="wrap footer__base">
-        <span>© 2026 ATech elektronika d.o.o. All rights reserved.</span>
-        <button class="totop" data-hover>Back to top ↑</button>
-      </div>
-      <div class="footer__giant" aria-hidden="true">ATECH</div>
-    </footer>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
